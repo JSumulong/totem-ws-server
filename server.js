@@ -12,14 +12,17 @@ app.use(function (req, res) {
 });
 
 var totem = {}
-totem.broadcast = function(data) {
-  console.log(data);
+totem.broadcast = function(dataString) {
+  console.log(dataString);
+  // TODO: don't broadcast back to the original client
   wss.clients.forEach(function each(client){
     console.log(client);
-    client.send(JSON.stringify(data));
+    client.send(dataString);
   });
 }
-totem.onMessage = totem.broadcast;
+totem.onMessage = function(msgJson) {
+  totem.broadcast(msgJson);
+}
 totem.onConnect = function connection(ws) {
   console.log("Client connected");
   ws.on('message', totem.onMessage);
