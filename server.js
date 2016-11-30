@@ -5,7 +5,7 @@ var server = require('http').createServer()
   , express = require('express')
   , app = express()
   , uuid = require('uuid/v4')
-  , port = 4080;
+  , port = process.env.PORT || 4080
 
 app.use(function (req, res) {
   res.send({ msg: "hello" }); // change to variable locations once test passes
