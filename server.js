@@ -13,6 +13,7 @@ app.use(function (req, res) {
 
 var totem = {}
 totem.broadcast = function(data) {
+  console.log(data);
   wss.clients.forEach(function each(client){
     console.log(client);
     client.send(JSON.stringify(data));
@@ -20,6 +21,7 @@ totem.broadcast = function(data) {
 }
 totem.onMessage = totem.broadcast;
 totem.onConnect = function connection(ws) {
+  console.log("Client connected");
   ws.on('message', totem.onMessage);
   ws.totemId = uuid();
   ws.send(JSON.stringify({type: "newConnection", id: ws.totemId}))
