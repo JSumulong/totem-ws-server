@@ -26,7 +26,9 @@ totem.onConnect = function connection(ws) {
   console.log("Client connected");
   ws.on('message', totem.onMessage);
   ws.totemId = uuid();
-  ws.send(JSON.stringify({type: "newConnection", id: ws.totemId}))
+  ws.send(JSON.stringify({type: "newConnection", id: ws.totemId}));
+  ws.send(JSON.stringify({id: "UIC", latitude: 41.874937, longitude: -87.652971, description: "whatever", name: "whatever"}));
+  ws.send(JSON.stringify({id: "TGT", latitude: 41.877534, longitude: -87.655127, description: "whatever", name: "whatever"}));
 }
 
 wss.on('connection', totem.onConnect);
