@@ -16,7 +16,6 @@ totem.broadcast = function(dataString) {
   console.log(dataString);
   // TODO: don't broadcast back to the original client
   wss.clients.forEach(function each(client){
-    console.log(client);
     client.send(dataString);
   });
 }
